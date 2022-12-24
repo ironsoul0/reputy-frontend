@@ -59,9 +59,9 @@ interface Props {
 const StyledDropzone: FC<Props> = ({ onImageChange }) => {
   const [files, setFiles] = useState([]);
 
-  const onDrop = useCallback((acceptedFiles) => {
+  const onDrop = useCallback((acceptedFiles: any) => {
     setFiles(
-      acceptedFiles.map((file) =>
+      acceptedFiles.map((file: any) =>
         Object.assign(file, {
           preview: URL.createObjectURL(file),
         })
@@ -83,19 +83,19 @@ const StyledDropzone: FC<Props> = ({ onImageChange }) => {
     isDragReject,
   } = useDropzone({
     maxFiles: 1,
-    accept: "image/jpeg, image/png,",
+    // accept: "image/jpeg, image/png,",
     onDrop,
   });
 
   useEffect(
     () => () => {
       // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
+      files.forEach((file) => URL.revokeObjectURL((file as any).preview));
     },
     [files]
   );
 
-  const thumbs = files.map((file) => (
+  const thumbs = files.map((file: any) => (
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
         <img alt="preview" src={file.preview} style={img} />

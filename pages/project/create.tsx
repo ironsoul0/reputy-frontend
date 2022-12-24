@@ -49,19 +49,19 @@ const CreatePage: FC = () => {
 
   const { state, send } = useContractFunction(registryContract, "registerApp");
 
-  const handleTitleChange = (event) => {
+  const handleTitleChange = (event: any) => {
     setTitle(event.target.value);
   };
 
-  const handleAdminAddressChange = (event) => {
+  const handleAdminAddressChange = (event: any) => {
     setAdminAddress(event.target.value);
   };
 
-  const handleDescriptionChange = (event) => {
+  const handleDescriptionChange = (event: any) => {
     setDescription(event.target.value);
   };
 
-  const handleImageUpload = async (file) => {
+  const handleImageUpload = async (file: any) => {
     if (!file) return;
     setImage(file);
     const formData = new FormData();
@@ -84,7 +84,7 @@ const CreatePage: FC = () => {
         formData,
         {
           headers: {
-            "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
+            "Content-Type": `multipart/form-data;`,
             Authorization: JWT,
           },
         }
@@ -221,7 +221,7 @@ const CreatePage: FC = () => {
           }}
           defaultValue={tag}
           onChange={setTag as never}
-          options={tagOptions}
+          options={tagOptions as any}
           placeholder="Select project tag"
         />
 
