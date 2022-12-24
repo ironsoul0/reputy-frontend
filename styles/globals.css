@@ -40,3 +40,11 @@ a:hover {
 .logo-link:hover {
   opacity: 1;
 }
+
+.MuiBox-root {
+  padding: 0 !important;
+}
+
+.MuiTabs-indicator {
+  background-color: #94DD3C !important;
+}

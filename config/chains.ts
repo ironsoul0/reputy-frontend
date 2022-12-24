@@ -30,3 +30,5 @@ export const isValidChain = (chainId: ChainId) => {
 export const chainReadProvider = new providers.StaticJsonRpcProvider(
   readOnlyUrls[TARGET_CHAIN]
 );
+
+export const blockExplorer = blockExplorers[TARGET_CHAIN];

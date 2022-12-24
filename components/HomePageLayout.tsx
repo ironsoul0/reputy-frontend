@@ -1,15 +1,15 @@
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
-import Typography from "@mui/material/Typography";
+import clsx from "clsx";
 import React, { FC } from "react";
-
-import { FeedCard, NFTCard } from "../components";
 
 type HomePageProps = {
   title: string;
   description: string;
+  rating?: number;
   dappImage: string;
+  tag: string;
   tab1: React.ReactElement;
   tab2: React.ReactElement;
   tab3: React.ReactElement;
@@ -48,6 +48,8 @@ export const HomePageLayout: FC<HomePageProps> = ({
   dappImage,
   title,
   description,
+  rating,
+  tag,
   tab1,
   tab2,
   tab3,
@@ -59,17 +61,59 @@ export const HomePageLayout: FC<HomePageProps> = ({
   };
 
   return (
-    <div className="container tw-my-12">
-      <img
-        alt="dao"
-        src={dappImage}
-        style={{ maxWidth: 150, maxHeight: 150, borderRadius: "50%" }}
-      />
-      <p className="mt-4 text-white tw-font-bold tw-text-2xl">{title}</p>
-      <p className="text-white">{description}</p>
+    <div className="tw-animate-smooth-appear">
+      <p className="tw-text-white tw-text-3xl tw-font-bold tw-mb-8">{title}</p>
+      <div
+        style={{
+          backgroundColor: "#202a30",
+          display: "block",
+          maxWidth: 500,
+        }}
+        className="tw-relative tw-rounded-2xl tw-bg-card-blue tw-text-soft-white tw-text-lg tw-font-normal tw-shadow-xl tw-mb-6"
+      >
+        <div
+          className="tw-absolute tw-top-2 tw-right-2 tw-px-2 tw-py-1 tw-rounded-lg tw-z-40"
+          style={{ backgroundColor: "#232627" }}
+        >
+          <p className="tw-text-sm tw-text-white tw-m-0">{tag}</p>
+        </div>
+
+        <div
+          className="tw-block tw-relative tw-rounded-xl tw-overflow-hidden tw-bg-contain tw-bg-no-repeat"
+          title="Equilibrium"
+          style={{
+            backgroundImage: `url(${dappImage})`,
+            backgroundSize: "100%",
+            height: 210,
+          }}
+        />
+
+        <div
+          className="tw-px-4 tw-py-4 tw-absolute tw-bottom-0 tw-rounded-b-xl"
+          style={{
+            width: "100%",
+            backgroundColor: "rgba(0,0,0, 0.85)",
+          }}
+        >
+          <p className="text-white tw-tracking-wide tw-m-0 tw-text-base">
+            {description}
+          </p>
+          <p
+            className={clsx(
+              "tw-font-semibold tw-transition-colors tw-duration-1000 tw-m-0 tw-text-red-500 tw-text-xl tw-mt-2",
+              rating !== undefined && "tw-text-green-550"
+            )}
+          >
+            {rating !== undefined ? `My rating: ${rating}` : "No rating"}
+          </p>
+        </div>
+      </div>
 
       <Box sx={{ width: "100%" }}>
-        <Box sx={{ borderBottom: 1, borderColor: "white", color: "white" }}>
+        <Box
+          sx={{ borderBottom: 1, borderColor: "white", color: "white" }}
+          style={{ padding: 0 }}
+        >
           <Tabs
             indicatorColor="secondary"
             value={value}
@@ -78,7 +122,7 @@ export const HomePageLayout: FC<HomePageProps> = ({
           >
             <Tab className="text-white" label="Feed" {...a11yProps(0)} />
             <Tab className="text-white" label="Ranking" {...a11yProps(1)} />
-            <Tab className="text-white" label="NFTs" {...a11yProps(2)} />
+            {/* <Tab className="text-white" label="NFTs" {...a11yProps(2)} /> */}
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>

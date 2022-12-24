@@ -1,6 +1,12 @@
-import React, { FC } from "react";
+import { useEthers } from "@usedapp/core";
+import clsx from "clsx";
+import { EventFilter, utils } from "ethers";
+import { useRouter } from "next/router";
+import React, { FC, useEffect } from "react";
 
-import { FeedCard, HomePageLayout, NFTCard } from "../../components";
+import { FeedCard, HomePageLayout, NFTCard, Spinner } from "../../components";
+import { blockExplorer } from "../../config";
+import { useAppFeed, useAppRanking, useReputyApp } from "../../hooks";
 
 const mock = [
   {
@@ -24,28 +30,33 @@ const mock = [
 ];
 
 const ProjectPage: FC = () => {
-  return (
+  const { account } = useEthers();
+  const router = useRouter();
+  const appAddress = router.query.id as string;
+  const { appInfo } = useReputyApp(appAddress);
+  const feed = useAppFeed(appAddress);
+  const ranking = useAppRanking(appAddress);
+
+  return appInfo ? (
     <HomePageLayout
-      dappImage="/dao1.jpg"
-      title="1inch DAO"
-      description="A decentralized organization that governs the 1inch network, enabling 1INCH holders to vote for key protocol parameters."
+      dappImage={appInfo.image}
+      title={appInfo.name}
+      description={appInfo.description}
+      rating={appInfo.rating}
+      tag={appInfo.tag}
       tab1={
-        <>
-          <div className="flex gap-8 tw-mt-6">
-            <FeedCard
-              dAppTitle="Bitgaming.me"
-              userAddress="0xd9b311d66...cc0f0706"
-              reputationBonus="5"
-              transactionMessage="User minted a bronze NFT"
-            />
-            <FeedCard
-              dAppTitle="Bitgaming.me"
-              userAddress="0xd9b311d66...cc0f0706"
-              reputationBonus="5"
-              transactionMessage="User minted a bronze NFT"
-            />
-          </div>
-        </>
+        <div className="flex tw-mt-6">
+          {feed &&
+            feed.map((feedEntry, i) => (
+              <FeedCard
+                key={i}
+                dAppTitle={appInfo.name}
+                userAddress={`${feedEntry.address.substring(0, 15)}...`}
+                reputationBonus={feedEntry.delta.toString()}
+                reputationChangeDirection={feedEntry.direction}
+              />
+            ))}
+        </div>
       }
       tab2={
         <>
@@ -56,18 +67,27 @@ const ProjectPage: FC = () => {
                   <th className="text-white">Rank</th>
                   <th className="text-white">Address</th>
                   <th className="text-white">Reputation</th>
-                  <th className="text-white"># of Transactions</th>
                 </tr>
               </thead>
               <tbody>
-                {mock.map((n, i) => (
-                  <tr key={i}>
-                    <th className="text-white tw-font-bold" scope="row">
-                      {n.Rank}
-                    </th>
-                    <td className="text-white tw-font-bold">{n.Address}</td>
-                    <td className="text-white">{n.Reputation}</td>
-                    <td className="text-white">{n["# of Transactions"]}</td>
+                {ranking?.map((n, i) => (
+                  <tr
+                    key={i}
+                    className={clsx(
+                      n.address === account ? "tw-text-green-550" : "text-white"
+                    )}
+                  >
+                    <td>{i + 1}</td>
+                    <td>
+                      <a
+                        href={`${blockExplorer}/${n.address}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {n.address.substring(0, 15)}...
+                      </a>
+                    </td>
+                    <td>{n.rating}</td>
                   </tr>
                 ))}
               </tbody>
@@ -76,27 +96,15 @@ const ProjectPage: FC = () => {
         </>
       }
       tab3={
-        <>
-          <div className="tw-flex tw-gap-8 tw-mt-6">
-            <NFTCard
-              title="#3496"
-              price="0.041 ETH"
-              image="/equilibrium.webp"
-            />
-            <NFTCard
-              title="#3496"
-              price="0.041 ETH"
-              image="/equilibrium.webp"
-            />
-            <NFTCard
-              title="#3496"
-              price="0.041 ETH"
-              image="/equilibrium.webp"
-            />
-          </div>
-        </>
+        <div className="tw-flex tw-gap-8 tw-mt-6">
+          <NFTCard title="#3496" price="0.041 ETH" image="/equilibrium.webp" />
+          <NFTCard title="#3496" price="0.041 ETH" image="/equilibrium.webp" />
+          <NFTCard title="#3496" price="0.041 ETH" image="/equilibrium.webp" />
+        </div>
       }
     />
+  ) : (
+    <Spinner className="tw-text-white tw-w-6" />
   );
 };
 
