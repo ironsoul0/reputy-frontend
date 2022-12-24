@@ -4,3 +4,4 @@ export * from "./Header";
 export * from "./HomePageLayout";
 export * from "./Logo";
 export * from "./NFTCard";
+export * from "./Spinner";

@@ -36,3 +36,7 @@ a:hover {
 a:hover {
   opacity: 0.8;
 }
+
+.logo-link:hover {
+  opacity: 1;
+}
