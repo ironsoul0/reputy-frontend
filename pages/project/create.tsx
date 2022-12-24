@@ -40,6 +40,7 @@ const CreatePage: FC = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [adminAddress, setAdminAddress] = useState("");
+  const [link, setLink] = useState("");
   const [image, setImage] = useState("");
   const [ipfsImageData, setIpfsImageData] = useState("");
   const [tag, setTag] = useState("");
@@ -51,6 +52,10 @@ const CreatePage: FC = () => {
 
   const handleTitleChange = (event: any) => {
     setTitle(event.target.value);
+  };
+
+  const handleLinkChange = (event: any) => {
+    setLink(event.target.value);
   };
 
   const handleAdminAddressChange = (event: any) => {
@@ -100,6 +105,7 @@ const CreatePage: FC = () => {
     console.log(
       title,
       `${title} | Reputy`,
+      link,
       tag,
       "RPT",
       `${IPFS_URI}/${ipfsImageData}`,
@@ -110,6 +116,7 @@ const CreatePage: FC = () => {
     send([
       title,
       `${title} | Reputy`,
+      link,
       tag,
       "RPT",
       `${IPFS_URI}/${ipfsImageData}`,
@@ -174,14 +181,21 @@ const CreatePage: FC = () => {
       </p>
       <div className="tw-mb-0 tw-pb-0">
         <input
-          className="h-32 tw-mb-6 tw-w-full tw-bg-gray-800 tw-rounded tw-border tw-border-gray-700 focus:tw-border-indigo-500 focus:tw-ring-2 focus:ring-indigo-900 tw-text-base tw-outline-none tw-text-gray-100 tw-py-2 tw-px-3 tw-resize-none tw-leading-6 tw-transition-colors tw-duration-200 tw-ease-in-out tw-block"
+          className="h-32 tw-mb-4 tw-w-full tw-bg-gray-800 tw-rounded tw-border tw-border-gray-700 focus:tw-border-indigo-500 focus:tw-ring-2 focus:ring-indigo-900 tw-text-base tw-outline-none tw-text-gray-100 tw-py-2 tw-px-3 tw-resize-none tw-leading-6 tw-transition-colors tw-duration-200 tw-ease-in-out tw-block"
           type="text"
           placeholder="Title of the project"
           onChange={handleTitleChange}
           value={title}
         />
         <input
-          className="h-32 tw-mb-6 tw-w-full tw-bg-gray-800 tw-rounded tw-border tw-border-gray-700 focus:tw-border-indigo-500 focus:tw-ring-2 focus:ring-indigo-900 tw-text-base tw-outline-none tw-text-gray-100 tw-py-2 tw-px-3 tw-resize-none tw-leading-6 tw-transition-colors tw-duration-200 tw-ease-in-out"
+          className="h-32 tw-mb-4 tw-w-full tw-bg-gray-800 tw-rounded tw-border tw-border-gray-700 focus:tw-border-indigo-500 focus:tw-ring-2 focus:ring-indigo-900 tw-text-base tw-outline-none tw-text-gray-100 tw-py-2 tw-px-3 tw-resize-none tw-leading-6 tw-transition-colors tw-duration-200 tw-ease-in-out tw-block"
+          type="text"
+          placeholder="Link to the project"
+          onChange={handleLinkChange}
+          value={link}
+        />
+        <input
+          className="h-32 tw-mb-4 tw-w-full tw-bg-gray-800 tw-rounded tw-border tw-border-gray-700 focus:tw-border-indigo-500 focus:tw-ring-2 focus:ring-indigo-900 tw-text-base tw-outline-none tw-text-gray-100 tw-py-2 tw-px-3 tw-resize-none tw-leading-6 tw-transition-colors tw-duration-200 tw-ease-in-out"
           type="text"
           placeholder="Admin address"
           onChange={handleAdminAddressChange}
@@ -231,7 +245,9 @@ const CreatePage: FC = () => {
         type="button"
         className="mt-4 tw-text-white tw-bg-blue-700 focus:ring-4 focus:tw-ring-blue-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-mr-2 tw-mb-2 focus:tw-outline-none tw-transition-all disabled:tw-cursor-not-allowed disabled:tw-opacity-40 hover:tw-bg-blue-800"
         onClick={handleFormSubmit}
-        disabled={!title || !description || !ipfsImageData || !tag || !account}
+        disabled={
+          !title || !link || !description || !ipfsImageData || !tag || !account
+        }
       >
         Submit Project
       </button>
