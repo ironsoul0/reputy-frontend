@@ -14,8 +14,15 @@ export const useNFTInfo = (address?: string, rating?: number) => {
 
   useEffect(() => {
     const fetchOpenseaSlug = async () => {
-      const { data } = await axios.get(`${API_URL}/asset_contract/${address}`);
-      setOpenseaSlug(data.collection.slug);
+      try {
+        const { data } = await axios.get(
+          `${API_URL}/asset_contract/${address}`
+        );
+        console.log("data", data);
+        setOpenseaSlug(data.collection.slug);
+      } catch (_) {
+        return;
+      }
     };
 
     if (address) fetchOpenseaSlug();

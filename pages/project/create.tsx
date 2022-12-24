@@ -1,17 +1,12 @@
 import { useContractFunction, useEthers } from "@usedapp/core";
 import axios from "axios";
-import { useRouter } from "next/router";
 import { FC, useEffect, useRef, useState } from "react";
 import Select from "react-select";
 import { toast } from "react-toastify";
 
 import { Modal } from "../../components";
 import StyledDropzone from "../../components/StyledDropzone";
-import {
-  useRegistryContract,
-  useRegistryContractWrite,
-  useTopUp,
-} from "../../hooks";
+import { useRegistryContractWrite } from "../../hooks";
 
 const JWT = process.env.NEXT_PUBLIC_PINATA_TOKEN;
 
@@ -106,7 +101,7 @@ const CreatePage: FC = () => {
       title,
       `${title} | Reputy`,
       link,
-      tag,
+      typeof tag === "object" ? (tag as any).value : tag,
       "RPT",
       `${IPFS_URI}/${ipfsImageData}`,
       description,
@@ -117,7 +112,7 @@ const CreatePage: FC = () => {
       title,
       `${title} | Reputy`,
       link,
-      tag,
+      typeof tag === "object" ? (tag as any).value : tag,
       "RPT",
       `${IPFS_URI}/${ipfsImageData}`,
       description,
@@ -126,8 +121,6 @@ const CreatePage: FC = () => {
   };
 
   useEffect(() => {
-    console.log("tx state", state);
-
     if (state.status === "Mining") {
       toastRef.current = toast.loading("Mining your transaction..");
     } else if (state.status === "Success") {

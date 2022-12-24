@@ -128,7 +128,7 @@ export const HomePageLayout: FC<HomePageProps> = ({
             </p>
           </div>
           <div className="tw-flex tw-text-base">
-            {rating && (
+            {rating !== undefined && rating > 0 && (
               <a
                 className="tw-mr-3 tw-px-4 tw-py-2 tw-rounded-md tw-bg-slate-700 tw-transition-all"
                 href={`${openseaUrl}/assets/goerli/${address}/${nftIndex}`}
@@ -138,14 +138,16 @@ export const HomePageLayout: FC<HomePageProps> = ({
                 My NFT
               </a>
             )}
-            <a
-              className="tw-px-4 tw-py-2 tw-rounded-md tw-bg-slate-700 tw-transition-all"
-              href={`${openseaUrl}/collection/${openseaSlug}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              OpenSea
-            </a>
+            {openseaSlug && (
+              <a
+                className="tw-px-4 tw-py-2 tw-rounded-md tw-bg-slate-700 tw-transition-all"
+                href={`${openseaUrl}/collection/${openseaSlug}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                OpenSea
+              </a>
+            )}
           </div>
         </div>
       </div>
