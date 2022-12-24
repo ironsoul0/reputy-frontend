@@ -1,4 +1,5 @@
 import { FC } from "react";
+
 import { DAOCard } from "../components/DAOCard";
 
 const projects = [
@@ -32,7 +33,8 @@ const projects = [
   },
   {
     title: "EX Sports",
-    description: "EX Sport Starz - platform that allows sport fans to trade digital assets.",
+    description:
+      "EX Sport Starz - platform that allows sport fans to trade digital assets.",
     image: "app5.png",
     tag: "Sport",
     status: "Launched",
@@ -44,22 +46,16 @@ const projects = [
     tag: "Games",
     status: "Coming soon",
   },
-]
+];
 
 const App: FC = () => {
   return (
-    <div className="container tw-mt-12">
-      <p className="tw-text-white tw-text-3xl tw-font-bold tw-mb-8">
-        The library of decentralized apps
-      </p>
-      <div className="row">
-        {
-          projects.map((n, i) => (
-            <div key={i} className="col-3 mb-4">
-              <DAOCard {...n} />
-            </div>
-          ))
-        }
+    <div>
+      <p className="tw-text-white tw-text-3xl tw-font-bold tw-mb-8">Apps</p>
+      <div className="tw-grid tw-grid-cols-1 tw-gap-7 md:tw-grid-cols-2">
+        {projects.map((n, i) => (
+          <DAOCard {...n} key={i} />
+        ))}
       </div>
     </div>
   );
