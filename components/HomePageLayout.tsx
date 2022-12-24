@@ -4,12 +4,15 @@ import Tabs from "@mui/material/Tabs";
 import clsx from "clsx";
 import React, { FC } from "react";
 
+import { openseaUrl } from "../config";
+
 type HomePageProps = {
   title: string;
   description: string;
   rating?: number;
   dappImage: string;
   tag: string;
+  address: string;
   tab1: React.ReactElement;
   tab2: React.ReactElement;
   tab3: React.ReactElement;
@@ -49,6 +52,7 @@ export const HomePageLayout: FC<HomePageProps> = ({
   title,
   description,
   rating,
+  address,
   tag,
   tab1,
   tab2,
@@ -113,16 +117,18 @@ export const HomePageLayout: FC<HomePageProps> = ({
           <div className="tw-flex tw-text-base">
             <a
               className="tw-px-4 tw-py-2 tw-rounded-md tw-bg-slate-700 tw-transition-all"
-              href="#"
+              href={`${openseaUrl}/${address}`}
+              target="_blank"
+              rel="noreferrer"
             >
               OpenSea
             </a>
-            <a
+            {/* <a
               className="tw-ml-3 tw-px-4 tw-py-2 tw-rounded-md tw-bg-slate-700 tw-transition-all"
               href="#"
             >
               My NFT
-            </a>
+            </a> */}
           </div>
         </div>
       </div>

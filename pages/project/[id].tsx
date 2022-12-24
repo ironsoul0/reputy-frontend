@@ -66,6 +66,7 @@ const ProjectPage: FC = () => {
 
   return appInfo ? (
     <HomePageLayout
+      address={appInfo.address}
       dappImage={appInfo.image}
       title={appInfo.name}
       description={appInfo.description}

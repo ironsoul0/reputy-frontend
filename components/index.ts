@@ -6,4 +6,4 @@ export * from "./Logo";
 export * from "./Modal";
 export * from "./NFTCard";
 export * from "./Spinner";
-export * from './UserRow';
+export * from "./UserRow";

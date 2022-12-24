@@ -32,3 +32,5 @@ export const chainReadProvider = new providers.StaticJsonRpcProvider(
 );
 
 export const blockExplorer = blockExplorers[TARGET_CHAIN];
+
+export const openseaUrl = "https://testnets.opensea.io/assets/goerli/goerli";
