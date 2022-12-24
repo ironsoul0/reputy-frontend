@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  prefix: 'tw-',
+  prefix: "tw-",
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -10,10 +10,10 @@ module.exports = {
   ],
   theme: {
     screens: {
-      sm: '480px',
-      md: '768px',
-      lg: '976px',
-      xl: '1440px',
+      sm: "480px",
+      md: "768px",
+      lg: "976px",
+      xl: "1440px",
     },
     extend: {
       colors: {
@@ -25,6 +25,27 @@ module.exports = {
         green: {
           550: "#94DD3C",
         },
+      },
+      keyframes: {
+        appear: {
+          "0%": { opacity: 0, transform: "translateY(20px)" },
+          "100%": { opacity: 1, transform: "none" },
+        },
+        "fade-in-down": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(-10px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
+      },
+      animation: {
+        "pulse-fast": "pulse 6.5s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "smooth-appear": "appear 0.5s cubic-bezier(0.4, 0, 0.6, 1) forwards",
+        "fade-in-down": "fade-in-down 0.5s ease-out",
       },
     },
   },

@@ -1,5 +1,6 @@
 import React, { FC } from "react";
-import { FeedCard, NFTCard, HomePageLayout } from "../../components";
+
+import { FeedCard, HomePageLayout, NFTCard } from "../../components";
 
 const mock = [
   {
@@ -77,9 +78,21 @@ const ProjectPage: FC = () => {
       tab3={
         <>
           <div className="tw-flex tw-gap-8 tw-mt-6">
-            <NFTCard title="#3496" price="0.041 ETH" image="/equilibrium.webp" />
-            <NFTCard title="#3496" price="0.041 ETH" image="/equilibrium.webp" />
-            <NFTCard title="#3496" price="0.041 ETH" image="/equilibrium.webp" />
+            <NFTCard
+              title="#3496"
+              price="0.041 ETH"
+              image="/equilibrium.webp"
+            />
+            <NFTCard
+              title="#3496"
+              price="0.041 ETH"
+              image="/equilibrium.webp"
+            />
+            <NFTCard
+              title="#3496"
+              price="0.041 ETH"
+              image="/equilibrium.webp"
+            />
           </div>
         </>
       }

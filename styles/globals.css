@@ -20,4 +20,23 @@ a {
   box-sizing: border-box;
 }
 
-.table-bordered td {border: none !important; }
+.table-bordered td {
+  border: none !important;
+}
+
+a {
+  transition: opacity 0.1s;
+}
+
+a,
+a:hover {
+  color: white;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+.logo-link:hover {
+  opacity: 1;
+}

@@ -1,8 +1,9 @@
-import React, { FC } from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Typography from "@mui/material/Typography";
+import React, { FC } from "react";
+
 import { FeedCard, NFTCard } from "../components";
 
 type HomePageProps = {
@@ -38,16 +39,19 @@ function TabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
 
-export const HomePageLayout: FC<HomePageProps> = ({ dappImage, title, description, tab1, tab2, tab3 }) => {
+export const HomePageLayout: FC<HomePageProps> = ({
+  dappImage,
+  title,
+  description,
+  tab1,
+  tab2,
+  tab3,
+}) => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -56,8 +60,12 @@ export const HomePageLayout: FC<HomePageProps> = ({ dappImage, title, descriptio
 
   return (
     <div className="container tw-my-12">
-      <img alt="dao" src={dappImage} style={{ maxWidth: 150, maxHeight: 150, borderRadius: '50%' }} />
-      <p className="text-white tw-font-bold tw-text-2xl mt-4">{title}</p>
+      <img
+        alt="dao"
+        src={dappImage}
+        style={{ maxWidth: 150, maxHeight: 150, borderRadius: "50%" }}
+      />
+      <p className="mt-4 text-white tw-font-bold tw-text-2xl">{title}</p>
       <p className="text-white">{description}</p>
 
       <Box sx={{ width: "100%" }}>
