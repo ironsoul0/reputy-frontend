@@ -6,7 +6,7 @@ import { ChainIDUrl, TARGET_CHAIN } from "./chains";
 
 const registryAddresses: ChainIDUrl = {
   [ChainId.Hardhat]: "0x46d4674578a2daBbD0CEAB0500c6c7867999db34",
-  [ChainId.Goerli]: "0x13aA6dCfFa2eea29B9534a6D73fd2887B806902D",
+  [ChainId.Goerli]: "0x617B369E95619323B97028d6587cC1D877C46fb5",
 };
 
 export const RegistryContract = {
