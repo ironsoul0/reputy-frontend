@@ -56,11 +56,11 @@ export const DAOCard: FC<Props> = ({
             <p
               style={{ zIndex: 100, fontSize: 14 }}
               className={clsx(
-                "tw-font-semibold tw-transition-colors tw-duration-1000 tw-m-0 tw-text-red-500",
-                rating !== undefined && "tw-text-green-550"
+                "tw-font-semibold tw-transition-colors tw-duration-1000 tw-m-0",
+                rating ? "tw-text-green-550" : "tw-text-red-500"
               )}
             >
-              {rating !== undefined ? `My rating: ${rating}` : "No rating"}
+              {rating ? `My rating: ${rating}` : "No rating"}
             </p>
           </div>
 

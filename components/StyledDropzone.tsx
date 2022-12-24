@@ -129,7 +129,7 @@ const StyledDropzone: FC<Props> = ({ onImageChange }) => {
           Drag and drop single "jpg" or "png" here, or click to select an image
         </p>
       </div>
-      <aside style={thumbsContainer}>{thumbs}</aside>
+      {files.length > 0 && <aside style={thumbsContainer}>{thumbs}</aside>}
     </>
   );
 };

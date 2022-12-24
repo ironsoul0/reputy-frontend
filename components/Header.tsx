@@ -16,7 +16,7 @@ export const Header: FC = () => {
       </Link>
       <div className="tw-flex tw-items-center tw-gap-4">
         <Link
-          href="/create"
+          href="/project/create"
           className="tw-no-underline tw-outline-none tw-text-white tw-mr-4"
           style={{ color: "white" }}
         >

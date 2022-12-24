@@ -67,7 +67,6 @@ export const HomePageLayout: FC<HomePageProps> = ({
         style={{
           backgroundColor: "#202a30",
           display: "block",
-          maxWidth: 500,
         }}
         className="tw-relative tw-rounded-2xl tw-bg-card-blue tw-text-soft-white tw-text-lg tw-font-normal tw-shadow-xl tw-mb-6"
       >
@@ -84,28 +83,47 @@ export const HomePageLayout: FC<HomePageProps> = ({
           style={{
             backgroundImage: `url(${dappImage})`,
             backgroundSize: "100%",
-            height: 210,
+            height: 240,
           }}
         />
 
         <div
-          className="tw-px-4 tw-py-4 tw-absolute tw-bottom-0 tw-rounded-b-xl"
+          className="tw-px-4 tw-py-4 tw-absolute tw-bottom-0 tw-rounded-b-xl tw-flex tw-justify-between tw-items-center"
           style={{
             width: "100%",
             backgroundColor: "rgba(0,0,0, 0.85)",
           }}
         >
-          <p className="text-white tw-tracking-wide tw-m-0 tw-text-base">
-            {description}
-          </p>
-          <p
-            className={clsx(
-              "tw-font-semibold tw-transition-colors tw-duration-1000 tw-m-0 tw-text-red-500 tw-text-xl tw-mt-2",
-              rating !== undefined && "tw-text-green-550"
-            )}
-          >
-            {rating !== undefined ? `My rating: ${rating}` : "No rating"}
-          </p>
+          <div>
+            <p
+              className="text-white tw-tracking-wide tw-m-0 tw-text-base"
+              style={{ maxWidth: 300 }}
+            >
+              {description}
+            </p>
+            <p
+              className={clsx(
+                "tw-font-semibold tw-transition-colors tw-duration-1000 tw-m-0 tw-text-xl tw-mt-2",
+                rating ? "tw-text-green-550" : "tw-text-red-500"
+              )}
+            >
+              {rating ? `My rating: ${rating}` : "No rating"}
+            </p>
+          </div>
+          <div className="tw-flex tw-text-base">
+            <a
+              className="tw-px-4 tw-py-2 tw-rounded-md tw-bg-slate-700 tw-transition-all"
+              href="#"
+            >
+              OpenSea
+            </a>
+            <a
+              className="tw-ml-3 tw-px-4 tw-py-2 tw-rounded-md tw-bg-slate-700 tw-transition-all"
+              href="#"
+            >
+              My NFT
+            </a>
+          </div>
         </div>
       </div>
 

@@ -9,15 +9,6 @@ import { Multicall, readOnlyUrls } from "../config";
 
 const config: Config = {
   readOnlyUrls: { ...readOnlyUrls },
-  supportedChains: [
-    ChainId.Mainnet,
-    ChainId.Kovan,
-    ChainId.Rinkeby,
-    ChainId.Ropsten,
-    ChainId.Goerli,
-    ChainId.Localhost,
-    ChainId.Hardhat,
-  ],
   multicallAddresses: {
     [ChainId.Hardhat]: Multicall[ChainId.Hardhat],
   },

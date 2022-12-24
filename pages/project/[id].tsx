@@ -1,33 +1,11 @@
 import { useEthers } from "@usedapp/core";
 import clsx from "clsx";
-import { EventFilter, utils } from "ethers";
 import { useRouter } from "next/router";
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 
 import { FeedCard, HomePageLayout, NFTCard, Spinner } from "../../components";
 import { blockExplorer } from "../../config";
 import { useAppFeed, useAppRanking, useReputyApp } from "../../hooks";
-
-const mock = [
-  {
-    Rank: 1,
-    Address: "0xd9b311d66...cc0f0704",
-    Reputation: 65,
-    "# of Transactions": 120,
-  },
-  {
-    Rank: 2,
-    Address: "0xd9b311d66...cc0f0705",
-    Reputation: 23,
-    "# of Transactions": 56,
-  },
-  {
-    Rank: 3,
-    Address: "0xd9b311d66...cc0f0706",
-    Reputation: 20,
-    "# of Transactions": 40,
-  },
-];
 
 const ProjectPage: FC = () => {
   const { account } = useEthers();
@@ -83,6 +61,11 @@ const ProjectPage: FC = () => {
                         href={`${blockExplorer}/${n.address}`}
                         target="_blank"
                         rel="noreferrer"
+                        className={clsx(
+                          n.address === account
+                            ? "tw-text-green-550"
+                            : "text-white"
+                        )}
                       >
                         {n.address.substring(0, 15)}...
                       </a>
