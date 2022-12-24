@@ -112,7 +112,7 @@ const ProjectPage: FC = () => {
                       <td>{i + 1}</td>
                       <td>
                         <a
-                          href={`${blockExplorer}/${n.address}`}
+                          href={`${blockExplorer}/address/${n.address}`}
                           target="_blank"
                           rel="noreferrer"
                           className={clsx(

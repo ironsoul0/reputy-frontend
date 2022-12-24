@@ -81,7 +81,7 @@ export const Modal: React.FC<Props> = ({
             <div className="tw-flex tw-justify-end tw-pt-2">
               <a
                 className="tw-p-3 tw-px-4 tw-mr-2 tw-text-indigo-500 tw-bg-transparent tw-rounded-lg hover:tw-bg-gray-100 hover:tw-text-indigo-400"
-                href={`${blockExplorer}/${contractAddress}`}
+                href={`${blockExplorer}/address/${contractAddress}`}
                 target="_blank"
                 rel="noreferrer"
               >

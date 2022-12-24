@@ -5,8 +5,8 @@ import ReputyRegistry from "./abi/ReputyRegistry.json";
 import { ChainIDUrl, TARGET_CHAIN } from "./chains";
 
 const registryAddresses: ChainIDUrl = {
-  [ChainId.Hardhat]: "0x75b0B516B47A27b1819D21B26203Abf314d42CCE",
-  [ChainId.Goerli]: "0x2C04c3Faf3040eA42A6887eC230Cf0a397eb28a2",
+  [ChainId.Hardhat]: "0x46d4674578a2daBbD0CEAB0500c6c7867999db34",
+  [ChainId.Goerli]: "0x7CCdF96E7A069D17BE8A0a5387fAC9850f57fd5b",
 };
 
 export const RegistryContract = {
