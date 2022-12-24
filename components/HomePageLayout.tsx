@@ -5,6 +5,7 @@ import clsx from "clsx";
 import React, { FC } from "react";
 
 import { openseaUrl } from "../config";
+import { useNFTInfo } from "../hooks";
 
 type HomePageProps = {
   title: string;
@@ -12,6 +13,7 @@ type HomePageProps = {
   rating?: number;
   dappImage: string;
   tag: string;
+  link: string;
   address: string;
   tab1: React.ReactElement;
   tab2: React.ReactElement;
@@ -53,12 +55,14 @@ export const HomePageLayout: FC<HomePageProps> = ({
   description,
   rating,
   address,
+  link,
   tag,
   tab1,
   tab2,
   tab3,
 }) => {
   const [value, setValue] = React.useState(0);
+  const { openseaSlug, nftIndex } = useNFTInfo(address, rating);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -66,13 +70,22 @@ export const HomePageLayout: FC<HomePageProps> = ({
 
   return (
     <div className="tw-animate-smooth-appear">
-      <p className="tw-text-white tw-text-3xl tw-font-bold tw-mb-8">{title}</p>
+      <div className="tw-mb-8">
+        <a
+          className="tw-text-white tw-text-3xl tw-font-bold"
+          href={link}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {title}
+        </a>
+      </div>
       <div
         style={{
           backgroundColor: "#202a30",
           display: "block",
         }}
-        className="tw-relative tw-rounded-2xl tw-bg-card-blue tw-text-soft-white tw-text-lg tw-font-normal tw-shadow-xl tw-mb-6"
+        className="tw-relative tw-rounded-2xl tw-bg-card-blue tw-text-soft-white tw-text-lg tw-font-normal tw-shadow-xl tw-mb-6 tw-block"
       >
         <div
           className="tw-absolute tw-top-2 tw-right-2 tw-px-2 tw-py-1 tw-rounded-lg tw-z-40"
@@ -82,7 +95,7 @@ export const HomePageLayout: FC<HomePageProps> = ({
         </div>
 
         <div
-          className="tw-block tw-relative tw-rounded-xl tw-overflow-hidden tw-bg-contain tw-bg-no-repeat"
+          className="tw-block tw-relative tw-rounded-xl tw-overflow-hidden tw-bg-contain tw-bg-no-repeat tw-bg-center"
           title="Equilibrium"
           style={{
             backgroundImage: `url(${dappImage})`,
@@ -115,20 +128,24 @@ export const HomePageLayout: FC<HomePageProps> = ({
             </p>
           </div>
           <div className="tw-flex tw-text-base">
+            {rating && (
+              <a
+                className="tw-mr-3 tw-px-4 tw-py-2 tw-rounded-md tw-bg-slate-700 tw-transition-all"
+                href={`${openseaUrl}/assets/goerli/${address}/${nftIndex}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                My NFT
+              </a>
+            )}
             <a
               className="tw-px-4 tw-py-2 tw-rounded-md tw-bg-slate-700 tw-transition-all"
-              href={`${openseaUrl}/${address}`}
+              href={`${openseaUrl}/collection/${openseaSlug}`}
               target="_blank"
               rel="noreferrer"
             >
               OpenSea
             </a>
-            {/* <a
-              className="tw-ml-3 tw-px-4 tw-py-2 tw-rounded-md tw-bg-slate-700 tw-transition-all"
-              href="#"
-            >
-              My NFT
-            </a> */}
           </div>
         </div>
       </div>

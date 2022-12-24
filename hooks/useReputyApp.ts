@@ -7,6 +7,7 @@ import { chainReadProvider, ReputyAppContract } from "../config";
 export type TReputyApp = {
   name: string;
   description: string;
+  link: string;
   tag: string;
   image: string;
   address: string;
@@ -31,6 +32,7 @@ export const fetchInfoFromApp = async (
   return {
     name: appConfig.name,
     description: appConfig.description,
+    link: appConfig.link,
     tag: appConfig.tag,
     image: appConfig.logoURI,
     address,

@@ -3,58 +3,9 @@ import clsx from "clsx";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 
-import {
-  FeedCard,
-  HomePageLayout,
-  NFTCard,
-  Spinner,
-  UserRow,
-} from "../../components";
+import { FeedCard, HomePageLayout, NFTCard, Spinner } from "../../components";
 import { blockExplorer } from "../../config";
 import { useAppFeed, useAppRanking, useReputyApp } from "../../hooks";
-
-const users = [
-  {
-    name: "alibek.eth",
-    avatar: "/av1.png",
-  },
-  {
-    name: "rauan.eth",
-    avatar: "/av2.png",
-  },
-  {
-    name: "ulan.eth",
-    avatar: "/av3.png",
-  },
-  {
-    name: "sanzhar.eth",
-    avatar: "/av4.png",
-  },
-  {
-    name: "temirzhan.eth",
-    avatar: "/av5.png",
-  },
-  {
-    name: "akezhan.eth",
-    avatar: "/av6.png",
-  },
-  {
-    name: "khafiz.eth",
-    avatar: "/av7.png",
-  },
-  {
-    name: "daulet.eth",
-    avatar: "/av8.png",
-  },
-  {
-    name: "khafiz.eth",
-    avatar: "/av7.png",
-  },
-  {
-    name: "daulet.eth",
-    avatar: "/av8.png",
-  },
-];
 
 const ProjectPage: FC = () => {
   const { account } = useEthers();
@@ -66,6 +17,7 @@ const ProjectPage: FC = () => {
 
   return appInfo ? (
     <HomePageLayout
+      link={appInfo.link}
       address={appInfo.address}
       dappImage={appInfo.image}
       title={appInfo.name}
