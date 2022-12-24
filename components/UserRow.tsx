@@ -36,9 +36,9 @@ export const UserRow: React.FC<any> = ({
           </div>
         </div>
       </div>
-      <p className="flex items-center justify-center w-20 py-1 text-xl font-bold bg-gray-300 rounded-md">
+      {/* <p className="flex items-center justify-center w-20 py-1 text-xl font-bold bg-gray-300 rounded-md">
         {score?.toFixed(1)}
-      </p>
+      </p> */}
     </div>
   );
 };

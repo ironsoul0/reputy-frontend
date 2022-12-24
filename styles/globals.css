@@ -48,3 +48,12 @@ a:hover {
 .MuiTabs-indicator {
   background-color: #94DD3C !important;
 }
+
+.modal {
+  transition: opacity 0.25s ease;
+}
+
+.modal-active {
+  overflow-x: hidden;
+  overflow-y: visible !important;
+}

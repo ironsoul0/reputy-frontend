@@ -1,8 +1,13 @@
+import { useContractFunction } from "@usedapp/core";
 import axios from "axios";
-import { FC, useState } from "react";
+import { useRouter } from "next/router";
+import { FC, useEffect, useRef, useState } from "react";
 import Select from "react-select";
+import { toast } from "react-toastify";
 
+import { Modal } from "../../components";
 import StyledDropzone from "../../components/StyledDropzone";
+import { useRegistryContract, useTopUp } from "../../hooks";
 
 const JWT = process.env.NEXT_PUBLIC_PINATA_TOKEN;
 
@@ -23,14 +28,21 @@ const statusOptions = [
   { value: "Coming soon", label: "Coming soon" },
 ];
 
+const IPFS_URI = "https://ipfs.io/ipfs";
+
 const CreatePage: FC = () => {
+  const registryContract = useRegistryContract();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [adminAddress, setAdminAddress] = useState("");
   const [image, setImage] = useState("");
   const [ipfsImageData, setIpfsImageData] = useState("");
   const [tag, setTag] = useState("");
-  const [status, setStatus] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const toastRef = useRef<any>(null);
+  const [contractAddress, setContractAddress] = useState("");
+
+  const { state, send } = useContractFunction(registryContract, "registerApp");
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -72,25 +84,80 @@ const CreatePage: FC = () => {
           },
         }
       );
-      setIpfsImageData(res.data);
-      console.log(res.data);
+      console.log("IpfsHash", res.data.IpfsHash);
+      setIpfsImageData(res.data.IpfsHash);
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleFormSubmit = () => {
-    const projectData = {
+    console.log(
       title,
-      description,
+      `${title} | Reputy`,
       tag,
-      status,
-      ipfsImageData,
-    };
+      "RPT",
+      `${IPFS_URI}/${ipfsImageData}`,
+      description,
+      [adminAddress]
+    );
+
+    send([
+      title,
+      `${title} | Reputy`,
+      tag,
+      "RPT",
+      `${IPFS_URI}/${ipfsImageData}`,
+      description,
+      [adminAddress],
+    ]);
   };
+
+  useEffect(() => {
+    console.log("tx state", state);
+
+    if (state.status === "Mining") {
+      toastRef.current = toast.loading("Mining your transaction..");
+    } else if (state.status === "Success") {
+      toast.update(toastRef.current, {
+        render: "Successfuly created rating contract your DApp",
+        type: "success",
+        isLoading: false,
+        progress: 50,
+      });
+
+      const id = setTimeout(() => {
+        toast.dismiss(toastRef.current);
+        clearTimeout(id);
+      }, 2000);
+
+      setContractAddress((state?.receipt as any).events[0].args[0]);
+      setShowModal(true);
+    } else if (state.status === "Fail") {
+      toast.update(toastRef.current, {
+        render: "Failed to mine your transaction",
+        type: "error",
+        isLoading: false,
+      });
+
+      const id = setTimeout(() => {
+        toast.dismiss(toastRef.current);
+        clearTimeout(id);
+      }, 2000);
+    } else if (state.status === "Exception") {
+      toast.error("Something is wrong.. Please check your connection.");
+    }
+  }, [state]);
+
+  // useTopUp();
 
   return (
     <div className="tw-mt-10">
+      <Modal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        contractAddress={contractAddress}
+      />
       <p className="tw-text-white tw-text-3xl tw-font-bold tw-text-left">
         Create rating for your DApp
       </p>
@@ -159,7 +226,7 @@ const CreatePage: FC = () => {
         type="button"
         className="mt-4 tw-text-white tw-bg-blue-700 focus:ring-4 focus:tw-ring-blue-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-mr-2 tw-mb-2 focus:tw-outline-none tw-transition-all disabled:tw-cursor-not-allowed disabled:tw-opacity-40 hover:tw-bg-blue-800"
         onClick={handleFormSubmit}
-        disabled={!title || !description || !image || !tag}
+        disabled={!title || !description || !ipfsImageData || !tag}
       >
         Submit Project
       </button>

@@ -3,6 +3,7 @@ export * from "./FeedCard";
 export * from "./Header";
 export * from "./HomePageLayout";
 export * from "./Logo";
+export * from "./Modal";
 export * from "./NFTCard";
 export * from "./Spinner";
 export * from './UserRow';

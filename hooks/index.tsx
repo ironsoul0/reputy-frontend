@@ -4,3 +4,4 @@ export * from "./useAppRanking";
 export * from "./useRegistryContract";
 export * from "./useReputyApp";
 export * from "./useReputyApps";
+export * from "./useTopUp";
