@@ -1,4 +1,4 @@
-import { useContractFunction } from "@usedapp/core";
+import { useContractFunction, useEthers } from "@usedapp/core";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { FC, useEffect, useRef, useState } from "react";
@@ -7,7 +7,11 @@ import { toast } from "react-toastify";
 
 import { Modal } from "../../components";
 import StyledDropzone from "../../components/StyledDropzone";
-import { useRegistryContract, useTopUp } from "../../hooks";
+import {
+  useRegistryContract,
+  useRegistryContractWrite,
+  useTopUp,
+} from "../../hooks";
 
 const JWT = process.env.NEXT_PUBLIC_PINATA_TOKEN;
 
@@ -31,7 +35,8 @@ const statusOptions = [
 const IPFS_URI = "https://ipfs.io/ipfs";
 
 const CreatePage: FC = () => {
-  const registryContract = useRegistryContract();
+  const { account } = useEthers();
+  const registryContract = useRegistryContractWrite();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [adminAddress, setAdminAddress] = useState("");
@@ -226,7 +231,7 @@ const CreatePage: FC = () => {
         type="button"
         className="mt-4 tw-text-white tw-bg-blue-700 focus:ring-4 focus:tw-ring-blue-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-mr-2 tw-mb-2 focus:tw-outline-none tw-transition-all disabled:tw-cursor-not-allowed disabled:tw-opacity-40 hover:tw-bg-blue-800"
         onClick={handleFormSubmit}
-        disabled={!title || !description || !ipfsImageData || !tag}
+        disabled={!title || !description || !ipfsImageData || !tag || !account}
       >
         Submit Project
       </button>

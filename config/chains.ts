@@ -23,7 +23,7 @@ export const TARGET_CHAIN = (parseInt(
   process.env.NEXT_PUBLIC_TARGET_CHAIN_ID as string
 ) || ChainId.Hardhat) as ValidChainID;
 
-export const isValidChain = (chainId: ChainId) => {
+export const isValidChain = (chainId?: ChainId) => {
   return chainId == TARGET_CHAIN;
 };
 
